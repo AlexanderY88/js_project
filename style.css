@@ -80,7 +80,7 @@ body {
 
     .buttonSubmit {
         grid-column: 3 / 3;
-        grid-row: 1;
+        grid-row: 1; 
         align-self: center;
     }
 
