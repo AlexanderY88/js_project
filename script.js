@@ -8,12 +8,12 @@ let filter = "completed";
 
 // loading tasks
 document.addEventListener("DOMContentLoaded", () => initialize());
-
-
+ 
+// menu toggle
 document.addEventListener('DOMContentLoaded', function() {
     const menuButton = document.getElementById('menuButton');
     const menu = document.getElementById('menu');
-    const menuIcon = document.getElementById('menuIcon');
+    const menuIcon = document.getElementById('menuIcon'); 
     if(menuButton && menu && menuIcon) {
         menuButton.addEventListener('click', function(e) {
             e.stopPropagation();
