@@ -8,9 +8,17 @@ body {
     box-sizing: border-box;
 }
 
-#menu.hidden {
-  display: none;
+li {
+    list-style-type: none;
 }
+
+.buttonsContainer {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
 
 /*Desktop CSS*/
 @media screen and (min-width: 800px) {
@@ -39,14 +47,7 @@ body {
         padding-left: 20px;
     }
 
-    .mainMenu {
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 10px 20px;
-        font-size: 25px;
-    }
-    
+
     .textInput {
         width: 100%;
     }
@@ -99,13 +100,92 @@ body {
         text-align: center;
     }
     
+    
+
 	
 }
 
 
 /*Mobile CSS*/
 @media screen and (max-width: 799px) {
+    
+    .container {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: #ffffff;
+    }
+	
+    .header {
+        width: 100%;
+        background-color: #c7eaf3;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
 
+    .mainTitle {
+        flex-grow: 1;
+        text-align: center;
+        padding-left: 20px;
+    }
+
+    .addTaskForm {
+        font-size: 20px;
+    }
+
+    li {
+        font-size: 20px;
+    }
+    
+    .textInput {
+        width: 100%;
+    }
+
+    .addTaskContainer {
+        background-color: #c7eaf3;
+        padding: 10px;
+        border-radius: 8px;
+        margin: 2% 0;
+        justify-content: center;
+    }
+
+    #submitButton {
+        width: 100%;
+        margin: 3% 0;
+    }
+    
+    .tasksContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .itemsHeaderContainer {
+        background-color: #c7eaf3;
+        padding: 10px;
+        border-radius: 8px;
+        margin: 2% 0;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .task-text span {
+        word-break: break-word;
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+
+    /* Prevent buttons from shrinking or wrapping */
+    .list-group-item .d-flex.flex-row {
+        flex-shrink: 0;
+        min-width: 90px; 
+    }
+
+    
 
 
 }
