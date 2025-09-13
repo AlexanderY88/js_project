@@ -24,15 +24,16 @@
                         <label for="todoText" class="form-label" >Enter your todo item </label>
                         <input type="text" class="form-control" id="todoText" maxlength="120" >
                         <div id="todoTextMessage" class="form-text">Max length 120 symbols</div>
-                        <div id="errorMessage" class="form-text text-danger"></div>
+                        
                     </div>
                     <div class="mb-2 dateInput">
-                        <label for="dueDate" class="form-label">dueDate</label>
-                        <input type="date" class="form-control" id="dueDate">
+                        <label for="dueDate" class="form-label">Due Date</label>
+                        <input type="date" id="dueDate" name="dueDate" class="form-control"  />
                     </div>
-                    <dib class="buttonSubmit">
+                    <div class="buttonSubmit">
                         <button type="submit" class="btn btn-primary" id="submitButton">Submit</button>
-                    </dib>
+                    </div>
+                    <div id="errorMessage" class="form-text text-danger"></div>
                 </div>
             </form>
         </div>

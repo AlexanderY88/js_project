@@ -12,7 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
     addTask();
 });
  
-// fetch initial tasks from API or local storage
+
+// load tasks from ls and fetch initial tasks from API if local storage is empty
 async function fetchInitialTasks() {
     const LSTasks = getTasks();
     if (LSTasks.length > 0) {
@@ -55,26 +56,36 @@ function saveTasks(tasks) {
 
 // add new task
 function addTask() {
-    const form = document.querySelector(".addTaskForm"); // use class selector
+    const form = document.querySelector(".addTaskForm");
     if (!form) return;
     form.addEventListener("submit", (e) => {
         e.preventDefault();
         const errorMessage = document.getElementById("errorMessage");
         errorMessage.innerText = "";
-        const taskInputElement = document.getElementById("todoText"); // correct id
-        const dateInputElement = document.getElementById("dueDate"); // correct id
-        const date = dateInputElement.value;dueDate
+        const taskInputElement = document.getElementById("todoText");
+        const dateInputElement = document.getElementById("dueDate");
+        const date = dateInputElement.value;
         const title = taskInputElement.value.trim();
         if (title) {
             if (date) {
-                // to prevent user from entering past dates
-                let now = formatDate();
-                now.setHours(0, 0, 0, 0); // set to today's midnight, to ignore time and check only date
-                let selectedDate = formatDate(dateInputElement.value);
+                let now = new Date();
+                now.setHours(0, 0, 0, 0);
+                let selectedDate = new Date(dateInputElement.value);
                 selectedDate.setHours(0, 0, 0, 0);
                 if (selectedDate.getTime() >= now.getTime()) {
-                    let taskId = Math.floor(Math.random() * 10000);
-                    tasks.push({ id: taskId, title: title, completed: false, date: dateInputElement.value });
+                    if (editingTaskId !== null) {
+                        // Find and update the existing task
+                        const task = tasks.find(t => t.id === editingTaskId);
+                        if (task) {
+                            task.title = title;
+                            task.date = dateInputElement.value;
+                        }
+                        editingTaskId = null;
+                    } else {
+                        // Add new task
+                        let taskId = Math.floor(Math.random() * 10000);
+                        tasks.push({ id: taskId, title: title, completed: false, date: dateInputElement.value });
+                    }
                     saveTasks(tasks);
                     renderTasks();
                     taskInputElement.value = "";
@@ -105,7 +116,7 @@ function renderTasks() {
             taskList.push(task);
         }
     });
-    sortTasksByDate();
+    taskList.sort((a, b) => new Date(a.date) - new Date(b.date));
     printSortedTasks(taskList);
 }
 
@@ -162,7 +173,7 @@ function printSortedTasks(taskList) {
 
 // sort tasks by date
 function sortTasksByDate() {
-    tasks.sort((a, b) => formatDate(a.date) - formatDate(b.date));
+    tasks.sort((a, b) => new Date(a.date) - new Date(b.date));
     saveTasks(tasks);
 }
 
@@ -195,17 +206,17 @@ function formatDate(date) {
 
 // buttons listeners
 document.getElementById("showCompletedTasksBtn").addEventListener("click", showCompletedTasks);
+
+// global variable to track editing state
+let editingTaskId = null;
 // edit task
 function editTask(id) {
     const task = tasks.find(t => t.id === id);
     if (task) {
         document.getElementById("todoText").focus();
         document.getElementById("todoText").value = task.title;
-        // set new date in the date input field
-        document.getElementById("dueDate").value = formatDate(task.date).toISOString().split("T")[0];
-        tasks = tasks.filter(t => t.id !== id);
-        saveTasks(tasks);
-        renderTasks();
+        document.getElementById("dueDate").value = new Date(task.date).toISOString().split("T")[0];
+        editingTaskId = id; // the id of task that is editing
     }
 }
 
