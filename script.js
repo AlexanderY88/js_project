@@ -1,6 +1,5 @@
 'use strict';
 
-
 // global tasks array
 let tasks = getTasks();
 // global filter: completed/pending/all
