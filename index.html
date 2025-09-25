@@ -20,17 +20,17 @@
         <div class="addTaskContainer">
             <form class="addTaskForm">
                 <div class="form-row">
-                    <div class="mb-2 textInput">
+                    <div class="mb-2 textInput form-group">
                         <label for="todoText" class="form-label" >Enter your todo item </label>
                         <input type="text" class="form-control" id="todoText" maxlength="120" >
                         <div id="todoTextMessage" class="form-text">Max length 120 symbols</div>
                         
                     </div>
-                    <div class="mb-2 dateInput">
+                    <div class="mb-2 dateInput form-group" >
                         <label for="dueDate" class="form-label">Due Date</label>
                         <input type="date" id="dueDate" name="dueDate" class="form-control"  />
                     </div>
-                    <div class="buttonSubmit">
+                    <div class="buttonSubmit form-group">
                         <button type="submit" class="btn btn-primary" id="submitButton">Submit</button>
                     </div>
                     <div id="errorMessage" class="form-text text-danger"></div>
